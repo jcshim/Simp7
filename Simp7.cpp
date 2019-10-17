@@ -1,19 +1,16 @@
 ﻿#include<afxwin.h>
-class CMyFrame : public CFrameWnd {
+class CMyFrm : public CFrameWnd {
 public:
-	CMyFrame() {
-		Create(NULL, L"ANU Happy!");
+	CMyFrm() {
+		Create(NULL, L"Hi !");
 	}
 };
-class CExample : public CWinApp {
+class CMy : public CWinApp {
 	BOOL InitInstance() {
-		CMyFrame* Frame = new CMyFrame();
-		m_pMainWnd = Frame;
-
-		Frame->ShowWindow(SW_NORMAL);
-		Frame->UpdateWindow();
-
+		CMyFrm* Frm = new CMyFrm();
+		m_pMainWnd = Frm;
+		Frm->ShowWindow(1);
 		return TRUE;
 	}
 };
-CExample theApp;
+CMy theApp;
