@@ -1,16 +1,40 @@
 ﻿#include<afxwin.h>
-class CMyFrm : public CFrameWnd {
+class CMainFrame : public CFrameWnd {
 public:
-	CMyFrm() {
+	CMainFrame() {
 		Create(NULL, L"Hi !");
 	}
+	DECLARE_MESSAGE_MAP()
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	afx_msg void OnPaint();
 };
-class CMy : public CWinApp {
+class CMyWin : public CWinApp {
 	BOOL InitInstance() {
-		CMyFrm* Frm = new CMyFrm();
-		m_pMainWnd = Frm;
-		Frm->ShowWindow(1);
+		CMainFrame* m_Frame = new CMainFrame();
+		m_pMainWnd = m_Frame;
+		m_Frame->ShowWindow(1);
 		return TRUE;
 	}
 };
-CMy theApp;
+CMyWin theApp;
+BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
+	ON_WM_PAINT()
+END_MESSAGE_MAP()
+
+BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	cs.cx = 320;
+	cs.cy = 240;
+	return CFrameWnd::PreCreateWindow(cs);
+}
+
+
+void CMainFrame::OnPaint()
+{
+	CPaintDC dc(this);
+	CBrush b;
+	b.CreateSolidBrush(RGB(0, 255, 0));
+	dc.SelectObject(&b);
+	dc.Rectangle(10, 10, 290, 185);
+}
